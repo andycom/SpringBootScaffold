@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: springboot-sacffold
+  profiles:
+    active: dev
+
+
+# Enable response compression
+
+
