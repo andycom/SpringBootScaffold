@@ -1,6 +1,7 @@
 package com.fancv.controller;
 
 import com.fancv.service.RedisService;
+import com.fancv.service.RedissonService;
 import com.fancv.service.impl.RedissonDistributedLocker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("redis/")
-@Api(value = "Redis类控制器",tags="Redis类控制器")
+@Api(value = "Redis类控制器", tags = "Redis类控制器")
 public class RedisController {
 
     @Autowired
@@ -20,13 +21,14 @@ public class RedisController {
     @Autowired
     RedissonDistributedLocker redissonDistributedLocker;
 
-    @ApiOperation(value="获取用户列表", notes="")
+    @Autowired
+    RedissonService redissonService;
+
+    @ApiOperation(value = "获取用户列表", notes = "")
     @GetMapping("get-key")
     public String getKey(@RequestParam String key) {
         return redisService.getKey(key);
     }
-
-
 
 
     @RequestMapping(value = "hello2", method = RequestMethod.GET)
@@ -39,7 +41,7 @@ public class RedisController {
                 // 处理逻辑
                 /*redisUtil.incr("test_num1");*/
                 // Thread.sleep(1000);
-                System.out.println("TEST1===========第 " + num + " 次请求===================" );
+                System.out.println("TEST1===========第 " + num + " 次请求===================");
             }
         } catch (Exception e) {
             e.getStackTrace();
@@ -47,6 +49,20 @@ public class RedisController {
             redissonDistributedLocker.unlock(lock);
         }
         return "success";
+    }
+
+    @PostMapping("redisson-set")
+    public String redisson(String key, String value) {
+        redissonService.setKey(key, value);
+
+        return null;
+    }
+
+    @PostMapping("redisson-get")
+    public String redissonGet(String key) {
+        redissonService.getKey(key);
+
+        return redissonService.getKey(key);
     }
 
 }
