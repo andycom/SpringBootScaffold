@@ -1,6 +1,6 @@
 package com.fancv.entity.user.service;
 
-import com.fancv.entity.user.entity.User;
+import com.fancv.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

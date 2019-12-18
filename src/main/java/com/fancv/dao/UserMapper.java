@@ -1,7 +1,7 @@
 package com.fancv.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.fancv.entity.user.entity.User;
+import com.fancv.entity.User;
 
 /**
  * <p>

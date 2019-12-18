@@ -1,6 +1,6 @@
 package com.fancv.entity.user.service.impl;
 
-import com.fancv.entity.user.entity.User;
+import com.fancv.entity.User;
 import com.fancv.dao.UserMapper;
 import com.fancv.entity.user.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

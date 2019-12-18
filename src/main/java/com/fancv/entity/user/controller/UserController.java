@@ -1,7 +1,7 @@
 package com.fancv.entity.user.controller;
 
 
-import com.fancv.entity.user.entity.User;
+import com.fancv.entity.User;
 import com.fancv.entity.user.service.IUserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
