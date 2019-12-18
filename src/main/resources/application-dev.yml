@@ -1,0 +1,71 @@
+server:
+  port: 9050
+  session-timeout: 30
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json
+    min-response-size: 128  #byte 大于128 压缩
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+spring:
+  redis:
+    database: 15
+    host: 47.91.253.243
+    urls: 47.91.253.243 #redisson  config
+    port: 6379
+    password: m6Q#lMFHg
+    jedis:
+      pool:
+        max-active: 8
+        min-idle: 1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(js5B3NkO1AI2P9Ff2gfQ0rp5ZbGP52qssZ8FauLa+MmlT8orZgpy8I01gXcSYN8IYccPJ8szqBx+/ncAgiG7Ci1pjOB3MkAZ1DJRJA/0r5jGQ2zfCSoVTjupekut2TJPXpZWPlulJiA=)
+    username: ENC(XgVmsrsEQ+QcLVf7Gdb8uKIUOdtQBZde)
+    password: ENC(1GSnZvlTzrcZx7xSWJ9h4nQwL56Z/8mR)
+
+
+### 配置mybatisPlus
+#MyBatis
+mybatis-plus:
+  mapper-locations: classpath:/mapping/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.fancv.entity
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    #logic-delete-value: 0
+    #logic-not-delete-value: 1
+    #自定义填充策略接口实现
+    #meta-object-handler: com.xiaobingby.config.mybatis.MyMetaObjectHandler
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+
+
+age: 18
+name: jason-dev
+manInfo: "age:${age},name:${name}"
+
+config:
+  name: "hamish"
+  age: 14
+
