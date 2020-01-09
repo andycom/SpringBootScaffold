@@ -1,17 +1,33 @@
 package com.fancv.config;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.fancv.util.YmlConfig;
+import com.fancv.util.YmlConfigUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class RedissonManagerConfig {
+
+
+    @Autowired
+    private Environment environment;
+
+
 
     @Value("${spring.redis.urls}")
     private String urls;
@@ -21,7 +37,7 @@ public class RedissonManagerConfig {
     @Value("${spring.redis.port}")
     private String port;
 
-    @Profile("dev")
+
     @Bean(name = "redissonClient")
     public RedissonClient redissonClientSingle() throws IOException {
         RedissonClient redisson = null;
@@ -51,5 +67,18 @@ public class RedissonManagerConfig {
         // 可通过打印redisson.getConfig().toJSON().toString()来检测是否配置成功
         return redisson;
     }
+    @Profile("dev")
+    @Bean
+    @Lazy
+    public RedissonClient redisson() throws IOException {
+        // 本例子使用的是yaml格式的配置文件，读取使用Config.fromYAML，如果是Json文件，则使用Config.fromJSON
+
+        Map<String, String> result = new HashMap<>(64);
+        result=environment.getProperty("redisson",HashMap.class);
+        result.put("env", environment.getProperty("redisson.transportMode"));
+        Config config = Config.fromYAML(JSONUtils.toJSONString(result));
+        return Redisson.create(config);
+    }
+
 
 }
