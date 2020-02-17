@@ -13,10 +13,10 @@ server:
 spring:
   redis:
     database: 15
-    host: 47.91.253.243
-    urls: 47.91.253.243 #redisson  config
+    host: ENC(bP5AXJum9IJMbsyOQZI5QLoW2iqlX5Ps)
+    urls: ENC(bP5AXJum9IJMbsyOQZI5QLoW2iqlX5Ps) #redisson  config
     port: 6379
-    password: m6Q#lMFHg
+    password: ENC(rv9cmjNybmRO8R+E7JtK3JdusLJGZa6b)
     jedis:
       pool:
         max-active: 8
@@ -68,4 +68,35 @@ manInfo: "age:${age},name:${name}"
 config:
   name: "hamish"
   age: 14
+  sdjd: 12
+
+redisson:
+  clusterServersConfig:
+    idleConnectionTimeout: 10000
+    pingTimeout: 1000
+    connectTimeout: 10000
+    timeout: 3000
+    retryAttempts: 3
+    retryInterval: 1500
+    reconnectionTimeout: 3000
+    failedAttempts: 3
+    password: m6Q#lMFHg
+    subscriptionsPerConnection: 5
+    clientName: null
+    loadBalancer: !!org.redisson.connection.balancer.RoundRobinLoadBalancer
+    slaveSubscriptionConnectionMinimumIdleSize: 1
+    slaveSubscriptionConnectionPoolSize: 50
+    slaveConnectionMinimumIdleSize: 32
+    slaveConnectionPoolSize: 64
+    masterConnectionMinimumIdleSize: 32
+    masterConnectionPoolSize: 64
+    readMode: "SLAVE"
+    nodeAddresses: "redis://47.91.253.243:6379"
+    scanInterval: 1000
+  threads: 2
+  nettyThreads: 2
+  codec: !!org.redisson.codec.JsonJacksonCodec
+  transportMode: "NIO"
+
+
 
