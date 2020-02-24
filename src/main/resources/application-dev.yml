@@ -10,8 +10,12 @@ server:
     ansi:
       enabled: ALWAYS
 
+
+
 spring:
   redis:
+    redisson:
+      config=classpath: redisson.yaml
     database: 15
     host: 47.91.253.243
     urls: 47.91.253.243 #redisson  config
