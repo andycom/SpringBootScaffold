@@ -129,6 +129,24 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+
+
+        <!--把doc文件转化为pdf-->
+        <dependency>
+            <groupId>com.aspose.words</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>15.8.0</version>
+            <classifier>jdk16</classifier>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/file/aspose-words-15.8.0-jdk16.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
