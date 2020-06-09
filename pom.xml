@@ -191,4 +191,63 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/env/${package.environment}</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <finalName>${project.artifactId}</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <package.environment>product</package.environment>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/env/${package.environment}</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+                <finalName>${project.artifactId}</finalName>
+            </build>
+        </profile>
+    </profiles>
 </project>

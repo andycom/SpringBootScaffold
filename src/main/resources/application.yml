@@ -2,7 +2,7 @@ spring:
   application:
     name: springboot-sacffold
   profiles:
-    active: dev
+    active: @profileActive@
 
 jasypt:
   encryptor:
