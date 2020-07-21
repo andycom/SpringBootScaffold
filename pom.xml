@@ -146,7 +146,7 @@
             <artifactId>aspose-words</artifactId>
             <version>16.8.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/file/aspose-words-16.8.0-jdk16.jar</systemPath>
+            <systemPath>${project.basedir}/file/aspose-words-15.8.0-jdk16.jar</systemPath>
         </dependency>
 
 
