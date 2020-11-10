@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.dao.WjAuthenticationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.generator.model.WjAuthenticationInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="customer_code" jdbcType="VARCHAR" property="customerCode" />
+    <result column="customer_type" jdbcType="VARCHAR" property="customerType" />
+    <result column="address_province_code" jdbcType="VARCHAR" property="addressProvinceCode" />
+    <result column="address_province_name" jdbcType="VARCHAR" property="addressProvinceName" />
+    <result column="address_city_code" jdbcType="VARCHAR" property="addressCityCode" />
+    <result column="address_city_name" jdbcType="VARCHAR" property="addressCityName" />
+    <result column="address_area_code" jdbcType="VARCHAR" property="addressAreaCode" />
+    <result column="address_area_name" jdbcType="VARCHAR" property="addressAreaName" />
+    <result column="submit_user_id" jdbcType="VARCHAR" property="submitUserId" />
+    <result column="submit_user_phone" jdbcType="VARCHAR" property="submitUserPhone" />
+    <result column="auth_status" jdbcType="VARCHAR" property="authStatus" />
+    <result column="auth_remark" jdbcType="VARCHAR" property="authRemark" />
+    <result column="traffic_type" jdbcType="VARCHAR" property="trafficType" />
+    <result column="qr_possessor" jdbcType="VARCHAR" property="qrPossessor" />
+    <result column="qr_possessor_code" jdbcType="VARCHAR" property="qrPossessorCode" />
+    <result column="business_category_code" jdbcType="VARCHAR" property="businessCategoryCode" />
+    <result column="business_category_name" jdbcType="VARCHAR" property="businessCategoryName" />
+    <result column="business_license" jdbcType="VARCHAR" property="businessLicense" />
+    <result column="auth_submit_time" jdbcType="TIMESTAMP" property="authSubmitTime" />
+    <result column="regcap" jdbcType="VARCHAR" property="regcap" />
+    <result column="industryconame" jdbcType="VARCHAR" property="industryconame" />
+    <result column="deleted" jdbcType="CHAR" property="deleted" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="modifier_id" jdbcType="VARCHAR" property="modifierId" />
+    <result column="modifier_name" jdbcType="VARCHAR" property="modifierName" />
+    <result column="gmt_create_time" jdbcType="TIMESTAMP" property="gmtCreateTime" />
+    <result column="gmt_modify_time" jdbcType="TIMESTAMP" property="gmtModifyTime" />
+  </resultMap>
+</mapper>

@@ -11,12 +11,13 @@ import java.io.InputStream;
 import java.util.Map;
 
 public class contract {
-    /**
+/**
      * 创建合同
      *
      * @return
      * @throws Exception
      */
+
     public static byte[] buildContract(String filename, Map info) throws Exception {
 
 

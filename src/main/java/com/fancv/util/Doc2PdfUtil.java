@@ -1,7 +1,6 @@
 package com.fancv.util;
 
 import com.aspose.words.Document;
-import com.aspose.words.FontSettings;
 import com.aspose.words.License;
 import com.aspose.words.SaveFormat;
 
@@ -17,9 +16,9 @@ public class Doc2PdfUtil {
      **/
     public static byte[] doc2Pdf(InputStream inputStream) throws Exception {
         //去除掉许可证认证
-        if (!getLicense()){
+       /* if (!getLicense()) {
             return null;
-        }
+        }*/
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream);
         try {

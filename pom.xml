@@ -80,7 +80,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.12</version>
         </dependency>
 
 
@@ -144,9 +144,9 @@
         <dependency>
             <groupId>com.aspose.words</groupId>
             <artifactId>aspose-words</artifactId>
-            <version>16.8.0</version>
+            <version>19.5</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/file/aspose-words-16.8.0-jdk16.jar</systemPath>
+            <systemPath>${project.basedir}/file/aspose-words-19.5-jdk.jar</systemPath>
         </dependency>
 
 
@@ -178,6 +178,25 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.12.5</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>

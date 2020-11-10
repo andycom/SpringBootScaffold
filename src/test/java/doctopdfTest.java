@@ -1,5 +1,6 @@
 import com.fancv.contract.contract;
 import com.fancv.util.Doc2PdfUtil;
+import com.fancv.util.LocalDateUtil;
 
 import java.io.*;
 import java.util.HashMap;
@@ -10,29 +11,27 @@ public class doctopdfTest {
         try {
 
 
-
             long old = System.currentTimeMillis();
 
 
-            File file = new File("" +
-                    "D:/data/doc2pdf/1.docx");  //新建一个空白pdf文档
-            InputStream input = new FileInputStream(file);
-            HashMap re=new HashMap();
-            re.put("{1}","武汉加油");
-            re.put("{2}","330182199912210254");
-            re.put("{3}","哈士奇");
-            re.put("{4}","335182199912210254");
-            re.put("{5}","hkkdkd");
+          /*  File file = new File("" +
+                    "D:/data/doc2pdf/ZSZXZLHZXY.doc");  //新建一个空白pdf文档
+            InputStream input = new FileInputStream(file);*/
+            HashMap re = new HashMap();
+            re.put("brand", "武汉加油");
+            re.put("mainProduct", "330182199912210254");
+            re.put("boothArea", "哈士奇");
+            re.put("secondMobile", "335182199912210254");
+            re.put("firstContact", "hkkdkd");
 
-            byte[] bytword=  contract.buildContract("HT.doc",re);
+            byte[] bytword = contract.buildContract("ZSZXZLHZXY.doc", re);
 
             InputStream inputword = new ByteArrayInputStream(bytword);
 
-            byte[] byt  =  Doc2PdfUtil.doc2Pdf(inputword);
+            byte[] byt = Doc2PdfUtil.doc2Pdf(inputword);
 
 
-
-            File filepdf = new File("D:/data/doc2pdf/result.pdf");
+            File filepdf = new File("D:/data/doc2pdf/ZSZXZLHZXY" + LocalDateUtil.DateTimeString() + ".pdf");
 
             OutputStream output = new FileOutputStream(filepdf);
 

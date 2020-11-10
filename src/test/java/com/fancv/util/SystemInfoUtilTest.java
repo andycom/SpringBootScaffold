@@ -8,10 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SystemInfoUtilTest {
+public class SystemInfoUtilTest extends Object{
+
 
     @Test
-    public void getSystemInfo() {
+     public void getSystemInfo() {
 
         String osVersion = SystemInfoUtil.getSystemInfo("os.version");
         Assert.assertNotNull(osVersion);
@@ -20,5 +21,11 @@ public class SystemInfoUtilTest {
         String userPath = SystemInfoUtil.getSystemInfo("user.dir");
         Assert.assertNotNull(userPath);
         System.out.println("用户路径：" + userPath);
+    }
+    @Test
+     public void intHash(){
+        int a=10;int b=15;
+        int c=(a & b);
+        System.out.println(c);
     }
 }
