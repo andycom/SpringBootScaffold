@@ -61,13 +61,12 @@
             </exclusions>
         </dependency>
 
-
+        <!--swagger  增强-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>3.0.2</version>
         </dependency>
-
 
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
@@ -174,8 +173,6 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.0</version>
         </dependency>
-
-
 
 
         <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
