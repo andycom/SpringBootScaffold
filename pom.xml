@@ -13,6 +13,7 @@
         <redisson.version>3.11.5</redisson.version>
         <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
         <mybatisplus.version>3.3.0</mybatisplus.version>
+        <commons-pool2.version>2.9.0</commons-pool2.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -173,6 +174,20 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool2.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+        </dependency>
+
 
 
         <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
