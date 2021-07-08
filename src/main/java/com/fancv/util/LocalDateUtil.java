@@ -2,6 +2,7 @@ package com.fancv.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -41,11 +42,18 @@ public class LocalDateUtil {
 
     /**
      * 获取当前日期
+     *
      * @return
      */
     public static Date currentDate() {
         return new Date();
     }
+
+    public static String DateTimeString() {
+        Format format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        return format.format(new Date());
+    }
+
 
     public static Date convertToDate(LocalDateTime localDateTime) {
         ZoneId zoneId = ZoneId.systemDefault();
@@ -240,6 +248,7 @@ public class LocalDateUtil {
 
     /**
      * 根据季度获取首月
+     *
      * @param quarters
      * @return
      */
@@ -258,6 +267,7 @@ public class LocalDateUtil {
 
     /**
      * 根据月份获取季度
+     *
      * @param month
      * @return
      */

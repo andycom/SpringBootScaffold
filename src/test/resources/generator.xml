@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动包位置 -->
+    <classPathEntry location="/Users/zhangjunzhe/Documents/tools/mybatis_generator/mysql-connector-java-5.1.34.jar"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 生成一对一配置 -->
+        <plugin type="cc.bandaotixi.plugins.OneToOnePlugin"/>
+        <!-- 生成一对多配置 -->
+        <plugin type="cc.bandaotixi.plugins.OneToManyPlugin"/>
+        <plugin type="cc.bandaotixi.plugins.BatchInsertPlugin"/>
+        <plugin type="cc.bandaotixi.plugins.BatchUpdatePlugin"/>
+        <commentGenerator type="cc.bandaotixi.plugins.BDTCommentGenerator">
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <!--        <commentGenerator>-->
+        <!--            <property name="suppressAllComments" value="true" />-->
+        <!--        </commentGenerator>-->
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ytx?characterEncoding=utf8" userId="root"
+                        password="root">
+            <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="msa" password="msa">-->
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <!--       <javaModelGenerator targetPackage="com.vastsoft.yingtai.medany.module.top_contacts.entity" targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">-->
+        <!--           <property name="enableSubPackages" value="true" />-->
+        <!--         <property name="trimStrings" value="true" />-->
+        <!--       </javaModelGenerator>-->
+        <!-- 生成的映射文件包名和位置 -->
+        <!--       <sqlMapGenerator targetPackage="com.vastsoft.yingtai.medany.module.top_contacts.mapper" targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">-->
+        <!--          <property name="enableSubPackages" value="true"/>-->
+        <!--       </sqlMapGenerator>-->
+        <!-- 生成DAO的包名和位置 -->
+        <!--       <javaClientGenerator type="XMLMAPPER" targetPackage="com.vastsoft.yingtai.medany.module.top_contacts.mapper" targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">-->
+        <!--          <property name="enableSubPackages" value="true" />-->
+        <!--       </javaClientGenerator>-->
+
+
+        <!--生成的model 包路径 -->
+        <javaModelGenerator targetPackage="com.ytx.model"
+                            targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">
+            <property name="enableSubPackages" value="ture"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成xml mapper文件 路径 -->
+        <sqlMapGenerator targetPackage="com.ytx.dao"
+                         targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">
+            <property name="enableSubPackages" value="ture"/>
+        </sqlMapGenerator>
+
+        <!-- 生成的Dao接口 的包路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ytx.dao"
+                             targetProject="/Users/zhangjunzhe/Documents/tools/mybatis_generator/db">
+            <property name="enableSubPackages" value="ture"/>
+        </javaClientGenerator>
+
+        <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+        <!--对应数据库表名 -->
+
+        <table tableName="admin_user" domainObjectName="AdminUser" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <oneToOne mappingTable="role" column="role_id" joinColumn="role.id"/>
+        </table>
+
+        <table tableName="role" domainObjectName="Role" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <oneToOne mappingTable="admin_user" column="create_by" joinColumn="admin_user.id"/>
+            <oneToOne mappingTable="admin_user" column="update_by" joinColumn="admin_user.id"/>
+        </table>
+
+        <table tableName="role_menu" domainObjectName="RoleMenu" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <oneToOne mappingTable="menu" column="menu_id" joinColumn="menu.id"/>
+            <oneToOne mappingTable="admin_user" column="create_by" joinColumn="admin_user.id"/>
+        </table>
+
+        <table tableName="menu" domainObjectName="Menu" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <oneToMany mappingTable="menu" column="id" joinColumn="menu.parent_id"/>
+            <oneToOne mappingTable="admin_user" column="create_by" joinColumn="admin_user.id"/>
+            <oneToOne mappingTable="admin_user" column="update_by" joinColumn="admin_user.id"/>
+        </table>
+
+        <table tableName="sys_dict" domainObjectName="SysDict" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <oneToMany mappingTable="sys_dict" column="id" joinColumn="sys_dict.parent_id"/>
+        </table>
+
+        <!--        <table tableName="user" domainObjectName="User" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="role" column="role_id" joinColumn="role.id"/>-->
+        <!--            <oneToMany mappingTable="user_address" column="id" joinColumn="user_address.create_user_id"/>-->
+        <!--            <oneToOne mappingTable="account" column="id" joinColumn="account.user_id"/>-->
+        <!--            <oneToMany mappingTable="bank_card" column="id" joinColumn="bank_card.user_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="user_address" domainObjectName="UserAddress" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="role" domainObjectName="Role" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="role_menu" domainObjectName="RoleMenu" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToMany mappingTable="menu" column="menu_id" joinColumn="menu.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="menu" domainObjectName="Menu" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        -->
+        <!--        <table tableName="admin_user" domainObjectName="AdminUser" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="role" column="role_id" joinColumn="role.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="banner_config" domainObjectName="BannerConfig" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="reward" domainObjectName="Reward" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=1"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="reward_answer" domainObjectName="RewardAnswer" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="reward" column="reward_id" joinColumn="reward.id"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToOne mappingTable="user" column="at_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=2"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="imgs" domainObjectName="Imgs" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="job_info" domainObjectName="JobInfo" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="admin_user" column="create_user_id" joinColumn="admin_user.id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=3"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="job_apply" domainObjectName="JobApply" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="job_info" column="job_info_id" joinColumn="job_info.id"/>-->
+        <!--            <oneToOne mappingTable="user" column="user_id" joinColumn="user.id"/>-->
+        <!--            <oneToOne mappingTable="job_apply_order" column="id" joinColumn="job_apply_order.job_apply_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="job_apply_order" domainObjectName="JobApplyOrder" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store" domainObjectName="Store" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToOne mappingTable="store_capital" column="id" joinColumn="store_capital.store_id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=4"/>-->
+        <!--            <oneToMany mappingTable="store_month_sales" column="id" joinColumn="store_month_sales.store_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store_capital" domainObjectName="StoreCapital" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store_visit_history" domainObjectName="StoreVisitHistory" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store_capital_change" domainObjectName="StoreCapitalChange" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="goods" domainObjectName="Goods" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToMany mappingTable="goods_month_sales" column="id" joinColumn="goods_month_sales.goods_id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=5"/>-->
+        <!--            <oneToMany mappingTable="goods_specifications" column="id" joinColumn="goods_specifications.goods_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="goods_specifications" domainObjectName="GoodsSpecifications" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="category" domainObjectName="Category" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToMany mappingTable="goods" column="id" joinColumn="goods.category_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="order" domainObjectName="Order" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToOne mappingTable="user_address" column="address_id" joinColumn="user_address.id"/>-->
+        <!--            <oneToMany mappingTable="order_goods" column="id" joinColumn="order_goods.order_id"/>-->
+        <!--            <oneToOne mappingTable="delivery_man" column="delivery_man_id" joinColumn="delivery_man.id"/>-->
+        <!--            <oneToOne mappingTable="store" column="store_id" joinColumn="store.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="order_goods" domainObjectName="OrderGoods" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="goods_specifications" column="specifications_id" joinColumn="goods_specifications.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="evaluate" domainObjectName="Evaluate" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="order" column="order_id" joinColumn="order.id"/>-->
+        <!--            <oneToMany mappingTable="imgs" column="id" joinColumn="imgs.resource_id" where="imgs.resource_type=7"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="account" domainObjectName="Account" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="account_history" domainObjectName="AccountHistory" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="favourite" domainObjectName="Favourite" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="store" column="store_id" joinColumn="store.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="bank_card" domainObjectName="BankCard" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="feedback" domainObjectName="FeedBack" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="app_config" domainObjectName="AppConfig" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="protocol" domainObjectName="Protocol" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="user_message" domainObjectName="UserMessage" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="send_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="label" domainObjectName="Label" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="sys_message" domainObjectName="SysMessage" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="hot_job" domainObjectName="HotJob" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="job_info" column="job_id" joinColumn="job_info.id"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="order_in_cash" domainObjectName="OrderInCash" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="user" column="create_user_id" joinColumn="user.id"/>-->
+        <!--            <oneToOne mappingTable="bank_card" column="bank_card_id" joinColumn="bank_card.id"/>-->
+        <!--            <oneToOne mappingTable="store" column="store_id" joinColumn="store.id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="user_auth_audit" domainObjectName="UserAuthAudit" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store_auth_audit" domainObjectName="StoreAuthAudit" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="store_month_sales" domainObjectName="StoreMonthSales" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="goods_month_sales" domainObjectName="GoodsMonthSales" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="delivery_man" domainObjectName="DeliveryMan" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="delivery_account" domainObjectName="DeliveryAccount" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="common_problem" domainObjectName="CommonProblem" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="common_problem_type" domainObjectName="CommonProblemType" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToMany mappingTable="common_problem" column="id" joinColumn="common_problem.type_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="recharge_order" domainObjectName="RechargeOrder" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="dredge_city" domainObjectName="DredgeCity" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="banks" domainObjectName="Bank" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="order_cancel_reason" domainObjectName="OrderCancelReason" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="order_confirm" domainObjectName="OrderConfirm" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="sys_dict" domainObjectName="SysDict" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToMany mappingTable="sys_dict" column="id" joinColumn="sys_dict.up_id"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="support" domainObjectName="Support" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+
+
+        <!--        <table tableName="girl" domainObjectName="Girl" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="t_daa" domainObjectName="Tdaa" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            -->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="user" domainObjectName="User" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            -->
+        <!--        </table>-->
+
+        <!--        <table tableName="article" domainObjectName="Article" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--            <oneToOne mappingTable="consult" column="consult_id" joinColumn="consult.id"/>-->
+        <!--            <oneToMany mappingTable="comment" column="id" joinColumn="target_id" where="comment.target_type=1"/>-->
+        <!--            <oneToMany mappingTable="file" column="id" joinColumn="file.target_id" where="file.target_type=0"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="chat" domainObjectName="Chat" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!---->
+        <!--        <table tableName="comment" domainObjectName="Comment" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--            <oneToOne mappingTable="user" column="user_id" joinColumn="user.id"/>-->
+        <!--            <oneToMany mappingTable="comment" column="id" joinColumn="parent_id" where="comment.target_type=2"/>-->
+        <!--        </table>-->
+        <!---->
+        <!--        <table tableName="consult_reply" domainObjectName="ConsultReply" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--            <oneToOne mappingTable="user" column="user_id" joinColumn="user.id"/>-->
+        <!--            <oneToMany mappingTable="file" column="id" joinColumn="file.target_id" where="file.target_type=2"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="dictionary" domainObjectName="Dictionary" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="favourite" domainObjectName="Favourite" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="images" domainObjectName="Images" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+
+        <!--        <table tableName="vip_user" domainObjectName="VipUser" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!--        -->
+        <!--        <table tableName="wallet_history" domainObjectName="WalletHistory" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!--        <table tableName="order" domainObjectName="Order" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="reply" domainObjectName="Reply" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--            <oneToMany mappingTable="file" column="id" joinColumn="file.target_id" where="file.target_type=2"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="specialist" domainObjectName="Specialist" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--        </table>-->
+        <!---->
+        <!--        <table tableName="teach_videos" domainObjectName="TeachVideos" enableCountByExample="true"-->
+        <!--            enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+        <!--            selectByExampleQueryId="true">-->
+        <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <!--            <oneToMany mappingTable="comment" column="id" joinColumn="target_id" where="comment.target_type=3"/>-->
+        <!--            <oneToMany mappingTable="file" column="id" joinColumn="file.target_id" where="file.target_type=3"/>-->
+        <!--        </table>-->
+        <!---->
+
+
+    </context>
+</generatorConfiguration>

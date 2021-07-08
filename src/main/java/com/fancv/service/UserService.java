@@ -1,7 +1,16 @@
 package com.fancv.service;
 
-public interface UserService {
+/**
+ * 接口泛型
+ *
+ * @param <K>
+ * @param <V>
+ */
+public interface UserService<K, V> {
 
 
+    V get(K k);
+
+    void set(V v);
 
 }
