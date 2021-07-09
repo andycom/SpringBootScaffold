@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Data
 public class GuavaConfig {
+
     @Value("${guava.limit}")
     private Double limit;
 
